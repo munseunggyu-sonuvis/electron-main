@@ -13,6 +13,7 @@
     "electron:dist": "electron-builder --dir",
     "electron:build": "tsup",
     "build": "run-s next:build electron:build",
+    "dist": "run-s build  electron:dist -- --win",
     "dev": "npm-run-all --parallel electron:dev next:dev",
     "start": "npm-run-all --parallel next:start build",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,7 +32,7 @@
       "build",
       {
         "from": ".next/standalone",
-        "to": "app",
+        "to": "front/",
         "filter": [
           "!**/.env",
           "!**/package.json"
@@ -39,11 +40,11 @@
       },
       {
         "from": ".next/static",
-        "to": "app/.next/static"
+        "to": "front/.next/static"
       },
       {
-        "from": "public",
-        "to": "app/public"
+        "from": "front/public",
+        "to": "front/public"
       }
     ],
     "win": {
@@ -61,26 +62,26 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "devDependencies": {
+  "dependencies": {
     "cross-env": "^7.0.3",
-    "electron": "^36.5.0",
-    "electron-builder": "^26.0.12",
     "next": "14.2.18",
     "nodemon": "^3.1.10",
-    "npm-run-all": "^4.1.5",
     "react": "^18",
     "react-dom": "^18",
-    "tsup": "^8.5.0"
-  },
-  "dependencies": {
+    "tsup": "^8.5.0",
     "@electron-toolkit/utils": "^4.0.0",
+    "get-port-please": "^3.1.2"
+  },
+  "devDependencies": {
+    "electron": "^36.5.0",
+    "electron-builder": "^26.0.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.18",
-    "get-port-please": "^3.1.2",
     "postcss": "^8",
+    "npm-run-all": "^4.1.5",
     "tailwindcss": "^3.4.1"
   }
 }
