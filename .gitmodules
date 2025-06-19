@@ -1,3 +1,6 @@
 [submodule "front"]
 	path = front
 	url = https://github.com/munseunggyu-sonuvis/electron-sub.git
+[submodule "electron"]
+	path = electron
+	url = https://github.com/munseunggyu-sonuvis/electron-submodule.git
