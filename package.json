@@ -1,12 +1,22 @@
 {
   "name": "electron-main",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "build/main.js",
   "scripts": {
-    "dev:next": "cd front && next dev",
+    "next:dev": "cd front && next dev",
+    "next:build": "cd front && next build",
+    "next:start": "cd front && next start",
+    "postinstall": "electron-builder install-app-deps",
+    "electron:build_watch": "tsup --watch",
+    "electron:dev": "npm-run-all --parallel electron:build_watch electron:watch",
+    "electron:watch": "cross-env NODE_ENV='development' nodemon",
+    "electron:dist": "electron-builder --dir",
+    "electron:build": "tsup",
+    "build": "run-s next:build electron:build",
+    "dev": "npm-run-all --parallel electron:dev next:dev",
+    "start": "npm-run-all --parallel next:start build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "main": "build/main.js",
   "build": {
     "asar": true,
     "executableName": "NextJSElectron",
@@ -53,24 +63,24 @@
   "description": "",
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "electron": "^36.4.0",
+    "electron": "^36.5.0",
     "electron-builder": "^26.0.12",
+    "next": "14.2.18",
     "nodemon": "^3.1.10",
     "npm-run-all": "^4.1.5",
-    "tsup": "^8.5.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.18"
+    "tsup": "^8.5.0"
   },
   "dependencies": {
     "@electron-toolkit/utils": "^4.0.0",
-    "get-port-please": "^3.1.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "eslint": "^8",
-    "eslint-config-next": "14.2.18"
+    "eslint-config-next": "14.2.18",
+    "get-port-please": "^3.1.2",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
   }
 }
