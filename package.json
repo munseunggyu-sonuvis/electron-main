@@ -12,8 +12,9 @@
     "electron:watch": "cross-env NODE_ENV='development' nodemon",
     "electron:dist": "electron-builder --dir",
     "electron:build": "tsup",
+    "server:build": "cd back && tsc",
     "build": "run-s next:build electron:build",
-    "dist": "run-s build  electron:dist -- --win",
+    "dist": "run-s build server:build next:build electron:build electron:dist -- --win",
     "dev": "npm-run-all --parallel electron:dev next:dev",
     "start": "npm-run-all --parallel next:start build",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -45,7 +46,8 @@
       {
         "from": "front/public",
         "to": "front/public"
-      }
+      },
+      "back/build/**/*"
     ],
     "win": {
       "target": [
@@ -63,25 +65,30 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@electron-toolkit/utils": "^4.0.0",
+    "axios": "^1.10.0",
+    "cors": "^2.8.5",
     "cross-env": "^7.0.3",
+    "express": "^5.1.0",
+    "get-port-please": "^3.1.2",
     "next": "14.2.18",
     "nodemon": "^3.1.10",
     "react": "^18",
     "react-dom": "^18",
-    "tsup": "^8.5.0",
-    "@electron-toolkit/utils": "^4.0.0",
-    "get-port-please": "^3.1.2"
+    "tsup": "^8.5.0"
   },
   "devDependencies": {
-    "electron": "^36.5.0",
-    "electron-builder": "^26.0.12",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "electron": "^36.5.0",
+    "electron-builder": "^26.0.12",
     "eslint": "^8",
     "eslint-config-next": "14.2.18",
-    "postcss": "^8",
     "npm-run-all": "^4.1.5",
+    "postcss": "^8",
     "tailwindcss": "^3.4.1"
   }
 }
