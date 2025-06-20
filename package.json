@@ -15,7 +15,7 @@
     "dist:electron": "electron-builder --dir",
     "dev": "npm-run-all --parallel dev:*",
     "build": "run-s build:*",
-    "dist": "run-s build dist:electron -- --win",
+    "dist": "run-s build dist:electron",
     "start": "run-s start:*",
     "pack:win": "npm run build && electron-builder --config electron-builder.yml",
     "test": "echo \"Error: no test specified\" && exit 1"
