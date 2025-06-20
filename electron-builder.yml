@@ -1,0 +1,36 @@
+appId: com.fx-dev.app
+productName: fx-dev-app
+directories:
+  buildResources: build
+files:
+  - build
+  - from: .next/standalone
+    to: front/
+    filter:
+      - '!**/.env'
+      - '!**/package.json'
+  - from: .next/static
+    to: front/.next/static
+  - from: front/public
+    to: front/public
+  - from: back/build
+    to: back/build
+
+asarUnpack:
+  - "node_modules/next/dist/server/*.js"
+  - "node_modules/next/dist/server/**/*.js"
+  - "node_modules/next/dist/server/**/*.json"
+  - "node_modules/@img"
+  - "node_modules/sharp"
+  - "**\\*.{node,dll}"
+win:
+  executableName: fx-dev-app
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createStartMenuShortcut: true
+  createDesktopShortcut: true
+npmRebuild: false
